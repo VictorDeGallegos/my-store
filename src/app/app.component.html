@@ -7,7 +7,8 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>String interpolation</h1>
+    <h1>Curso Angular</h1>
+    <h2>String interpolation</h2>
     <h2>{{ "Hola mundo ".repeat(5) }}</h2>
     <p>3 + 3 = {{ 3 + 3 }}</p>
     <h3>Hola mi nombre es {{ name }} y tengo {{ age }}</h3>
@@ -22,14 +23,14 @@
     <progress [value]="age" max="100"></progress>
     <br />
     <br />
-    <h1>Objeto</h1>
+    <h2>Objeto</h2>
     <p>Nombre: {{ person.name }}</p>
     <p>Edad: {{ person.age }}</p>
     <p>Profesión: {{ person.profession }}</p>
     <p>Estado: {{ person.state }}</p>
     <img [src]="person.profileimg" alt="imagen de perfil" />
     <hr />
-    <h1>Eventos</h1>
+    <h2>Eventos</h2>
     <button [disabled]="btnDisabled">Enviar</button>
     <button (click)="toggleButtton()">Toggle Button</button>
     <p>Edad {{ person.age }}</p>
@@ -45,7 +46,7 @@
     <br />
     <input type="text" [value]="person.name" (keyup)="changeName($event)" />
     <hr />
-    <h1>Data binding</h1>
+    <h2>Data binding</h2>
     <p>Nombre: {{ person.name }}</p>
     <input
       type="text"
@@ -65,5 +66,49 @@
       [(ngModel)]="person.age"
     />
     <p>Valid: {{ ageInput.valid }}</p>
+    <hr />
+    <h2>Estructuras de Control</h2>
+    <h3>*ngIf</h3>
+    <input
+      type="text"
+      required
+      #nameInput2="ngModel"
+      [(ngModel)]="person.name"
+    />
+    <p *ngIf="person.name === 'nicolas'">Soy nicolas</p>
+    <p *ngIf="person.name === 'julian' && person.age === 18; else myBlock">
+      Soy julian
+    </p>
+    <ng-template #myBlock>
+      <p>Nombre no valido</p>
+    </ng-template>
+    <h3>ngFor</h3>
+    <input type="text" required #nameInput2="ngModel" [(ngModel)]="newEmoji" />
+    <button (click)="addEmoji()">Add emoji</button>
+    <!-- mostrar lista de emojis -->
+    <ul>
+      <!-- mostrar mensaje si la lista esta vacia -->
+      <li *ngIf="emojis.length === 0">No hay emojis</li>
+      <li *ngFor="let emoji of emojis; index as i">
+        {{ i }} {{ emoji }} <button (click)="deleteEmoji(i)">Eliminar</button>
+      </li>
+      <h3>ngFor Arrays</h3>
+      <div>
+        <div *ngFor="let product of products">
+          <p>Nombre: {{ product.name }}</p>
+          <p>Precio: {{ product.price }}</p>
+          <img width="250" [src]="product.image" alt="" />
+        </div>
+      </div>
+    </ul>
+    <hr />
+    <h2>ngSwitch</h2>
+    <input type="text" required [(ngModel)]="person.name" />
+    <div [ngSwitch]="person.name">
+      <p *ngSwitchCase="'nicolas'">La persona es nicolas</p>
+      <p *ngSwitchCase="'julian'">La persona es Julian</p>
+      <p *ngSwitchCase="'camilo'">La persona es Camilo</p>
+      <p *ngSwitchDefault>No hace match</p>
+    </div>
   </body>
 </html>

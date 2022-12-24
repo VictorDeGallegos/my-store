@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Product } from './product.models';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,5 +37,52 @@ export class AppComponent {
   changeName(event: Event) {
     const element = event.target as HTMLInputElement;
     this.person.name = element.value;
+  }
+
+  emojis: String[] = ['😂', '🐦', '🐳', '🌮', '💚'];
+  newEmoji = '';
+  products: Product[] = [
+    {
+      name: 'EL mejor juguete',
+      price: 565,
+      image: './assets/images/toy.jpeg',
+      category: 'all',
+    },
+    {
+      name: 'Bicicleta casi nueva',
+      price: 356,
+      image: './assets/images/bike.jpeg',
+    },
+    {
+      name: 'Colleción de albumnes',
+      price: 34,
+      image: './assets/images/album.jpeg',
+    },
+    {
+      name: 'Mis libros',
+      price: 23,
+      image: './assets/images/books.jpeg',
+    },
+    {
+      name: 'Casa para perro',
+      price: 34,
+      image: './assets/images/house.jpeg',
+    },
+    {
+      name: 'Gafas',
+      price: 3434,
+      image: './assets/images/glasses.jpg',
+    },
+  ];
+
+  //Agregar emoji a la lista
+  addEmoji() {
+    this.emojis.push(this.newEmoji);
+    this.newEmoji = '';
+  }
+
+  //Eliminar emoji de la lista
+  deleteEmoji(index: number) {
+    this.emojis.splice(index, 1);
   }
 }
